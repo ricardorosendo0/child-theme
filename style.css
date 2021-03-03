@@ -8,5 +8,41 @@ Author URI: https://www.ricardorosendo.com
 Template: Divi
 ======================================*/
 
-/* You can add your own CSS styles here. Use !important to overwrite styles if needed. */
 
+/*01 Mostrar botón añadir al carrito en hover */
+.woocommerce ul.products li.product {
+    overflow: hidden;
+}
+
+.woocommerce ul.products li.product:hover .button {
+    visibility: visible;
+    transform: translatey(0px);
+    transition: 0.35s;
+    opacity: 1;
+}
+
+.woocommerce ul.products li.product .button {
+    font-size: 12px;
+    line-height: 15px;
+    padding: 8px 12px;
+    min-height: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+    .woocommerce ul.products li.product .button {
+        position: absolute;
+        bottom: 70px;
+        margin-left: 10px !important;
+        visibility: hidden;
+        transform: translatey(0);
+        transition: 0.35s;
+        opacity: 0;
+    }
+	
+    .woocommerce ul.products li.product:hover .button {
+        transform: translatey(-10px) !important;
+	}
+}
+/*Find 01*/
