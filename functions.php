@@ -125,3 +125,19 @@ add_action( 'wp_enqueue_scripts', 'divichild_enqueue_scripts' );
 	   	}	
 	}
 
+	// Mostrar campos personalizados fecha en Woocomerce
+	function mostrar_campo_fecha_woo() {
+
+		global $product;
+
+		// reemplaza el nombre del campo personalizado por el tuyo
+		$fecha = get_post_meta( $product->id, 'fecha', true );
+
+		$fecha = str_replace( '_', ' ', $fecha );
+
+		if ( ! empty( $fecha ) ) {
+			echo '<div class="meta-cf"><i class="far fa-clock"></i>' . ucwords( $fecha ) . '</div>';
+		}
+
+	}
+	add_action( 'woocommerce_after_shop_loop_item_title', 'mostrar_campo_fecha_woo', 9 );
