@@ -134,3 +134,23 @@ add_action( 'wp_enqueue_scripts', 'divichild_enqueue_scripts' );
 		}
 	}
 	add_action( 'woocommerce_after_shop_loop_item_title', 'mostrar_campo_fecha_woo', 9 );
+
+//Fin del evento//
+
+// Actualiza automáticamente el estado de los pedidos a COMPLETADO
+add_action( 'woocommerce_order_status_processing', 'actualiza_estado_pedidos_a_completado' );
+add_action( 'woocommerce_order_status_on-hold', 'actualiza_estado_pedidos_a_completado' );
+function actualiza_estado_pedidos_a_completado( $order_id ) {
+    global $woocommerce;
+    
+    //ID's de las pasarelas de pago a las que afecta: bacs: transferencias, cod: pago contra entrega.
+    $paymentMethods = array( 'bacs', 'cheque', 'cod', 'paypal' );
+    
+    if ( !$order_id ) return;
+    $order = new WC_Order( $order_id );
+
+    if ( !in_array( $order->payment_method, $paymentMethods ) ) return;
+    $order->update_status( 'completed' );
+}
+
+
