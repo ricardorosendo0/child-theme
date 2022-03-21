@@ -8,12 +8,12 @@ add_action( 'wp_enqueue_scripts', 'divichild_enqueue_scripts' );
 	function my_loginlogo() {
 	    echo '<style type="text/css">
 	      body.login.login-action-login.wp-core-ui.locale-es-es {
-	    background-image: url(/wp-content/fondo.png) !important;
+	    background-image: url(wp-content/themes/child-theme/img/fondo.png) !important;
 	    background-size: cover;
 	    background-repeat: no-repeat;
 	}
 		  h1 a {
-	        background-image: url(/wp-content/logo.png) !important;
+	        background-image: url(wp-content/themes/child-theme/logo.png) !important;
 			background-size: 240px !important;
 			width: 240px !important;
 	      }
