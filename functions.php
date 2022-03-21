@@ -154,3 +154,17 @@ function actualiza_estado_pedidos_a_completado( $order_id ) {
 }
 
 
+// cambiar la url del login, Nota renombrar el wp-login.php por system.php
+function security_wp_login_filter( $url, $path, $orig_scheme ) {
+	//se cambia el nombre system por el que quieras
+    return preg_replace( '/wp-login\.php/', 'system\.php?/', $url, 1 );
+}
+function security_wp_login_redirect() {
+	//se cambia el nombre system por el que quieras
+    if ( strpos( $_SERVER['REQUEST_URI'], 'system\.php?/' ) === true ) {
+        wp_redirect( site_url() );
+        exit();
+    }
+}
+add_filter( 'site_url', 'security_wp_login_filter', 10, 3 );
+add_action( 'login_init', 'security_wp_login_redirect' );
