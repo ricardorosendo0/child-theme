@@ -227,3 +227,10 @@ function custom_override_checkout_fields( $fields ) {
     unset($fields['billing']['billing_city']);
     return $fields;
 }
+
+
+/*Ocultar mensaje en el backend de WP con estilos*/
+ add_action( 'admin_head', function () { 
+    echo '<style type="text/css">
+    .thwcfd-review-wrapper {display: none;}
+        </style>';});
