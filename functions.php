@@ -268,3 +268,26 @@ function my_hide_shipping_when_free_is_available( $rates ) {
  return ! empty( $free ) ? $free : $rates;
 }
 add_filter( 'woocommerce_package_rates', 'my_hide_shipping_when_free_is_available', 100 );
+
+
+
+// validar numero de telefono tipo TEL elementor
+function elementor_form_tel_field_validation( $field, $record, $ajax_handler ) {
+	// Remove native validation
+	$forms_module = \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'forms' );
+	remove_action( 'elementor_pro/forms/validation/tel', [ $forms_module->field_types['tel'], 'validation' ] );
+
+	// Run your own validation, ex:
+	if ( empty( $field['value'] ) ) {
+		return;
+	}
+
+	// Match this format XXXXXXXXXX, e.g. 123-456-7890
+	if ( preg_match( '/[0-9]{13}/', $field['value'] ) !== 1 ) {
+		$ajax_handler->add_error( $field['id'], esc_html__( 'Por favor asegúrese que el número de teléfono sea correto  3001234567', 'textdomain' ) );
+	}
+}
+
+add_action( 'elementor_pro/forms/validation/tel', 'elementor_form_tel_field_validation', 10, 3 );
+
+// Find de ajuste
