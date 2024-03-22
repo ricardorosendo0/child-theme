@@ -291,3 +291,10 @@ function elementor_form_tel_field_validation( $field, $record, $ajax_handler ) {
 add_action( 'elementor_pro/forms/validation/tel', 'elementor_form_tel_field_validation', 10, 3 );
 
 // Find de ajuste
+
+
+// Encolar estilos para el back - Admin - Añadir css en el backend de WordPress
+function oaf_admin_style() {
+  wp_enqueue_style('admin-styles', get_stylesheet_directory_uri().'/assets/css/admin.css');  
+}
+add_action('admin_enqueue_scripts', 'oaf_admin_style');
