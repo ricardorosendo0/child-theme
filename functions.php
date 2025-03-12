@@ -298,3 +298,25 @@ function oaf_admin_style() {
   wp_enqueue_style('admin-styles', get_stylesheet_directory_uri().'/assets/css/admin.css');  
 }
 add_action('admin_enqueue_scripts', 'oaf_admin_style');
+//Find
+
+
+// Desactivar notificaciones - Admin  en el backend de WordPress
+add_filter( 'site_transient_update_plugins', 'dcms_disable_plugin_update' );
+function dcms_disable_plugin_update( $value ) {
+	if ( isset($value) && is_object($value) ) {
+		// Desactivamos las notificaciones del elementor
+		if ( isset( $value->response['elementor/elementor.php'] ) ) {
+			unset( $value->response['elementor/elementor.php'] );
+		}
+		// Desactivamos las notificaciones del elementor pro
+		if ( isset( $value->response['elementor-pro/elementor-pro.php'] ) ) {
+			unset( $value->response['elementor-pro/elementor-pro.php'] );
+		}
+		// Desactivamos las notificaciones del elementor pro
+		if ( isset( $value->response['revslider/revslider.php'] ) ) {
+			unset( $value->response['revslider/revslider.php'] );
+		}
+	}
+	return $value;
+}
